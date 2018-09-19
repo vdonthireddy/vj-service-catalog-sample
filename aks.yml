@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pgclient-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pgclient-pod
+    spec:
+      containers:
+       - name: pgclient-container
+         image: vdonthireddy/pgclient:2.0
+         ports:
+          - containerPort: 80
+         env:
+          - name: host
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-secret
+                key: host
+          - name: database
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-secret
+                key: database
+          - name: username
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-secret
+                key: username
+          - name: password
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-secret
+                key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgclient-service
+  labels:
+    app: pgclient-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 9124
+  selector:
+    app: pgclient-pod

@@ -164,3 +164,43 @@ kubectl get secret postgresql-secret -o yaml
 ```sh
 echo 'NTQzMg==' | base64 -D
 ```
+Once the setup of service catalog is complete, and postgres instance and binding is created, run the following to deploy and test your application connecting to postgres instance:
+
+Note: Please update the allrun.sh and aks.yml files with your docker hub repository
+
+```sh
+mvn clean install
+```
+
+```sh
+docker rmi -f pgclient
+```
+```sh
+docker build -t pgclient .
+```
+```sh
+docker tag pgclient vdonthireddy/pgclient:2.0
+```
+```sh
+docker push vdonthireddy/pgclient:2.0
+```
+
+```sh
+kubectl delete deploy pgclient-deployment & kubectl delete service pgclient-service
+```
+```sh
+kubectl apply -f aks.yml
+```
+
+```sh
+kubectl get po,deploy,svc
+```
+```sh
+kubectl get svc -w
+```
+
+References:
+
+[Service Catalog](https://kubernetes.io/docs/concepts/extend-kubernetes/service-catalog/)
+[Integrate with Azure-managed services using Open Service Broker for Azure](https://docs.microsoft.com/en-us/azure/aks/integrate-azure)
+[Kubernetes ConfigMaps and Secrets](https://medium.com/google-cloud/kubernetes-configmaps-and-secrets-68d061f7ab5b)
