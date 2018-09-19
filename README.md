@@ -202,5 +202,7 @@ kubectl get svc -w
 References:
 
 [Service Catalog](https://kubernetes.io/docs/concepts/extend-kubernetes/service-catalog/)
+
 [Integrate with Azure-managed services using Open Service Broker for Azure](https://docs.microsoft.com/en-us/azure/aks/integrate-azure)
+
 [Kubernetes ConfigMaps and Secrets](https://medium.com/google-cloud/kubernetes-configmaps-and-secrets-68d061f7ab5b)
