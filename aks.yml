@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
        - name: pgclient-container
-         image: vdonthireddy/pgclient:2.0
+         image: vdonthireddy/pgclient:3.0
          ports:
           - containerPort: 80
          env:
