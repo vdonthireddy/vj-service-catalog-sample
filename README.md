@@ -120,10 +120,12 @@ kubectl create -f ./mypostgresinstance.yml
 ```sh
 svcat get instances
 ```
+You should see the following output:
+```sh
      NAME       NAMESPACE          CLASS           PLAN    STATUS
 +-------------+-----------+----------------------+-------+--------+
   pg-instance   default     azure-postgresql-9-6   basic   Ready
-
+```
 
 ```sh
 kubectl create -f ./mypostgresbinding.yml
@@ -132,9 +134,12 @@ kubectl create -f ./mypostgresbinding.yml
 ```sh
 svcat get bindings
 ```
+You should see the following output:
+```sh
         NAME          NAMESPACE    INSTANCE     STATUS
 +-------------------+-----------+-------------+--------+
   nodejs-pg-binding   default     pg-instance   Ready
+```
 
 ```sh
 svcat describe instance pg-instance
