@@ -1,0 +1,95 @@
+az login
+az account show
+az aks get-credentials --resource-group <resource group name> --name <AKS cluster name>
+
+#First, check your version of kubectl:
+kubectl version
+#Ensure that the server version and client versions are both 1.9 or above.
+#If you don’t have Helm installed already, download the helm CLI (https://github.com/kubernetes/helm#install) and then run the following command (this installs Tiller, the server-side component of Helm, into your Kubernetes cluster).
+helm init --upgrade
+#Tiller will need to be configured with cluster-admin access to properly install Service Catalog:
+kubectl create clusterrolebinding tiller-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
+#Helm Repository Setup:
+helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+helm search service-catalog
+#Now that your cluster and Helm are configured properly, installing Service Catalog is simple:
+helm install svc-cat/catalog --name catalog --namespace catalog
+
+kubectl get apiservice
+
+#Installing the Service Catalog CLI
+brew update
+brew install kubernetes-service-catalog-client
+
+#To use svcat as a plugin, run the following command after downloading:
+./svcat install plugin
+
+#Start by adding the Open Service Broker for Azure Helm repository:
+helm repo add azure https://kubernetescharts.blob.core.windows.net/azure
+
+#Create a Service Principal with the following Azure CLI command:
+az ad sp create-for-rbac
+
+#Output should be similar to the following. Take note of the appId, password, and tenant values, which you use in the next step.
+{
+  "appId": "2s87as18-1234-4s69-b3s4-82qwer7d76d5",
+  "displayName": "azure-cli-2018-09-19-03-16-46",
+  "name": "http://azure-cli-2018-09-19-03-16-46",
+  "password": "1s944s1d-1235-1234-9s8d-52528ss7s98s",
+  "tenant": "15sss6s1-d335-1234-b6f9-7s1234s09876"
+}
+
+#Set the following environment variables with the preceding values:
+AZURE_CLIENT_ID=<appId>
+AZURE_CLIENT_SECRET=<password>
+AZURE_TENANT_ID=<tenant>
+
+#Now, get your Azure subscription ID:
+az account show --query id --output tsv
+
+#Again, set the following environment variable with the preceding value:
+AZURE_SUBSCRIPTION_ID=[your Azure subscription ID from above]
+
+#Now that you've populated these environment variables, execute the following command to install the Open Service Broker for Azure using the Helm chart:
+helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=$AZURE_SUBSCRIPTION_ID --set azure.tenantId=$AZURE_TENANT_ID --set azure.clientId=$AZURE_CLIENT_ID --set azure.clientSecret=$AZURE_CLIENT_SECRET
+
+#Now, list installed service brokers:
+./svcat get brokers
+
+#You should see output similar to the following:
+NAME                               URL                                STATUS
++------+--------------------------------------------------------------+--------+
+  osba   http://osba-open-service-broker-azure.osba.svc.cluster.local   Ready
+
+#List the available service classes.
+./svcat get classes
+
+#List all available service plans
+./svcat get plans
+
+kubectl create -f ./mypostgresinstance.yml
+
+svcat get instances
+     NAME       NAMESPACE          CLASS           PLAN    STATUS
++-------------+-----------+----------------------+-------+--------+
+  pg-instance   default     azure-postgresql-9-6   basic   Ready
+
+
+kubectl create -f ./mypostgresbinding.yml
+
+svcat get bindings
+        NAME          NAMESPACE    INSTANCE     STATUS
++-------------------+-----------+-------------+--------+
+  nodejs-pg-binding   default     pg-instance   Ready
+
+svcat describe instance pg-instance
+
+svcat describe binding nodejs-pg-binding
+
+kubectl get secrets
+
+kubectl describe secret postgresql-secret
+
+kubectl get secret postgresql-secret -o yaml
+
+echo 'NTQzMg==' | base64 -D
