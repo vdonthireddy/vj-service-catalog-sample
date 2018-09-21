@@ -1,3 +1,4 @@
+
 ```sh
 az login
 ```
@@ -86,7 +87,7 @@ Again, set the following environment variable with the preceding value:
 AZURE_SUBSCRIPTION_ID=[your Azure subscription ID from above]
 ```
 
-Now that you've populated these environment variables, execute the following command to install the Open Service Broker for Azure using the Helm chart:
+Now that you've populated these environment variables, execute the following command to install the Open Service Broker for Azure using the Helm chart (Note: use --set modules.minStability=experimental for experimental services):
 ```sh
 helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=$AZURE_SUBSCRIPTION_ID --set azure.tenantId=$AZURE_TENANT_ID --set azure.clientId=$AZURE_CLIENT_ID --set azure.clientSecret=$AZURE_CLIENT_SECRET
 ```
@@ -171,7 +172,7 @@ echo 'NTQzMg==' | base64 -D
 ```
 Once the setup of service catalog is complete, and postgres instance and binding is created, run the following to deploy and test your application connecting to postgres instance:
 
-Note: Please update the allrun.sh and aks.yml files with your docker hub repository
+Note: Before you run the following commands, please take a look at aks.yml and allrun.sh files to make sure you have all the secrets created and comment/uncomment the sections based on your requirement.
 
 ```sh
 mvn clean install

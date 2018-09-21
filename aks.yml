@@ -30,26 +30,26 @@ spec:
               secretKeyRef:
                 name: azure-redis-secret
                 key: port
-          # - name: postgres_host
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: postgresql-secret
-          #       key: host
-          # - name: postgres_database
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: postgresql-secret
-          #       key: database
-          # - name: postgres_username
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: postgresql-secret
-          #       key: username
-          # - name: postgres_password
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: postgresql-secret
-          #       key: password
+          - name: postgres_host
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-secret
+                key: host
+          - name: postgres_database
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-secret
+                key: database
+          - name: postgres_username
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-secret
+                key: username
+          - name: postgres_password
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-secret
+                key: password
 ---
 apiVersion: v1
 kind: Service
