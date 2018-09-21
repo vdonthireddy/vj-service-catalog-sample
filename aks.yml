@@ -11,30 +11,45 @@ spec:
     spec:
       containers:
        - name: pgclient-container
-         image: vdonthireddy/pgclient:3.0
+         image: vdonthireddy/pgclient:5.0
          ports:
           - containerPort: 80
          env:
-          - name: host
+          - name: redis_host
             valueFrom:
               secretKeyRef:
-                name: postgresql-secret
+                name: azure-redis-secret
                 key: host
-          - name: database
+          - name: redis_password
             valueFrom:
               secretKeyRef:
-                name: postgresql-secret
-                key: database
-          - name: username
-            valueFrom:
-              secretKeyRef:
-                name: postgresql-secret
-                key: username
-          - name: password
-            valueFrom:
-              secretKeyRef:
-                name: postgresql-secret
+                name: azure-redis-secret
                 key: password
+          - name: redis_port
+            valueFrom:
+              secretKeyRef:
+                name: azure-redis-secret
+                key: port
+          # - name: postgres_host
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: postgresql-secret
+          #       key: host
+          # - name: postgres_database
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: postgresql-secret
+          #       key: database
+          # - name: postgres_username
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: postgresql-secret
+          #       key: username
+          # - name: postgres_password
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: postgresql-secret
+          #       key: password
 ---
 apiVersion: v1
 kind: Service

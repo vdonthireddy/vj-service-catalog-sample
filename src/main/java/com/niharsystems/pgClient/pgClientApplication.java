@@ -10,38 +10,66 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
 @RestController
 public class pgClientApplication {
+
+	@Autowired
+   	private StringRedisTemplate template;
+
 	@RequestMapping("/")
 	String hello() {
 		return "Hello Vijay!!!\n";
 	}
 
-	@GetMapping(value = "/host")
-	public String getHost() {
-		String host = System.getenv("host");
-		String dbName = System.getenv("database");
-		String dbUser = System.getenv("username");
-		String password = System.getenv("password");
-		String output = String.format("Host: %s\n; Database: %s\n; Username: %s\n; Password: %s\n", host, dbName,
-				dbUser, password);
-		return output;
+	// @GetMapping(value = "/host")
+	// public String getHost() {
+	// 	String host = System.getenv("postgres_host");
+	// 	String dbName = System.getenv("postgres_database");
+	// 	String dbUser = System.getenv("postgres_username");
+	// 	String password = System.getenv("postgres_password");
+	// 	String output = String.format("Host: %s\n; Database: %s\n; Username: %s\n; Password: %s\n", host, dbName,
+	// 			dbUser, password);
+	// 	return output;
+	// }
+
+	@GetMapping(value = "/cache")
+	public String getCache() throws Exception {
+		ValueOperations<String, String> ops = this.template.opsForValue();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm a");
+		sdf.setTimeZone(TimeZone.getTimeZone("PST"));
+		String timestamp = sdf.format(new Date()) + " PST";
+
+		String key = "Greeting: " + timestamp;
+		String foundInCache = "Found in Cache";
+		if (!this.template.hasKey(key)) {
+			foundInCache = "Not found in Cache";
+			ops.set(key, "Hello World: " + timestamp);
+		}
+
+		System.out.println(foundInCache);
+
+		return String.format("/cache called, cache: %s", ops.get(key));
 	}
 
 	@GetMapping(value = "/db")
 	public String getDb() throws Exception {
 
-		String host = System.getenv("host");
-		String dbName = System.getenv("database");
-		String dbUser = System.getenv("username");
-		String password = System.getenv("password");
+		String host = System.getenv("postgres_host");
+		String dbName = System.getenv("postgres_database");
+		String dbUser = System.getenv("postgres_username");
+		String password = System.getenv("postgres_password");
 
 		try {
 			Class.forName("org.postgresql.Driver");
