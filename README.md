@@ -91,6 +91,11 @@ Now that you've populated these environment variables, execute the following com
 helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=$AZURE_SUBSCRIPTION_ID --set azure.tenantId=$AZURE_TENANT_ID --set azure.clientId=$AZURE_CLIENT_ID --set azure.clientSecret=$AZURE_CLIENT_SECRET
 ```
 
+If you want to get all the experimental classes as well, use the following command
+```sh
+helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=$AZURE_SUBSCRIPTION_ID --set azure.tenantId=$AZURE_TENANT_ID --set azure.clientId=$AZURE_CLIENT_ID --set azure.clientSecret=$AZURE_CLIENT_SECRET --set modules.minStability=experimental
+```
+
 Now, list installed service brokers:
 ```sh
 ./svcat get brokers
@@ -138,7 +143,7 @@ You should see the following output:
 ```sh
         NAME          NAMESPACE    INSTANCE     STATUS
 +-------------------+-----------+-------------+--------+
-  nodejs-pg-binding   default     pg-instance   Ready
+  app-pg-binding   default     pg-instance   Ready
 ```
 
 ```sh
@@ -146,7 +151,7 @@ svcat describe instance pg-instance
 ```
 
 ```sh
-svcat describe binding nodejs-pg-binding
+svcat describe binding app-pg-binding
 ```
 
 ```sh
@@ -206,3 +211,7 @@ References:
 [Integrate with Azure-managed services using Open Service Broker for Azure](https://docs.microsoft.com/en-us/azure/aks/integrate-azure)
 
 [Kubernetes ConfigMaps and Secrets](https://medium.com/google-cloud/kubernetes-configmaps-and-secrets-68d061f7ab5b)
+
+[Azure Database for PostgreSQL](https://github.com/Azure/open-service-broker-azure/blob/master/docs/modules/postgresql.md)
+
+[Azure Redis Cache](https://github.com/Azure/open-service-broker-azure/blob/master/docs/modules/rediscache.md)

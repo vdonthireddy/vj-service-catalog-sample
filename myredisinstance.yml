@@ -1,0 +1,11 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: redis-instance
+  namespace: default
+spec:
+  clusterServiceClassExternalName: azure-rediscache
+  clusterServicePlanExternalName: basic
+  parameters:
+    location: eastus
+    resourceGroup: rgservicecatalog
