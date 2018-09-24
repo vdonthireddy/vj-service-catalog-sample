@@ -1,4 +1,4 @@
-package com.niharsystems.pgClient;
+package com.vjdon.myClient;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
 @RestController
-public class pgClientApplication {
+public class myClientApplication {
 
 	@Autowired
    	private StringRedisTemplate template;
@@ -66,10 +66,10 @@ public class pgClientApplication {
 	@GetMapping(value = "/db")
 	public String getDb() throws Exception {
 
-		String host = System.getenv("postgres_host");
-		String dbName = System.getenv("postgres_database");
-		String dbUser = System.getenv("postgres_username");
-		String password = System.getenv("postgres_password");
+		String host = System.getenv("azure-postgres_host");
+		String dbName = System.getenv("azure-postgres_database");
+		String dbUser = System.getenv("azure-postgres_username");
+		String password = System.getenv("azure-postgres_password");
 
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -149,6 +149,6 @@ public class pgClientApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(pgClientApplication.class, args);
+		SpringApplication.run(myClientApplication.class, args);
 	}
 }

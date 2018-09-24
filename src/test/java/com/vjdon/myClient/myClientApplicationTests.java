@@ -1,4 +1,4 @@
-package com.niharsystems.pgClient;
+package com.vjdon.myClient;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class pgClientApplicationTests {
+public class myClientApplicationTests {
 
 	@Test
 	public void contextLoads() {

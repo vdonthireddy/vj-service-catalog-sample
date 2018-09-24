@@ -1,66 +1,66 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: pgclient-deployment
+  name: k8-svcat-azure-client-deployment
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: pgclient-pod
+        app: k8-svcat-azure-client-pod
     spec:
       containers:
-       - name: pgclient-container
-         image: vdonthireddy/pgclient:5.0
+       - name: k8-svcat-azure-client-container
+         image: vdonthireddy/k8-svcat-azure-client:2.0
          ports:
           - containerPort: 80
          env:
-          - name: redis_host
+          - name: azure-redis_host
             valueFrom:
               secretKeyRef:
                 name: azure-redis-secret
                 key: host
-          - name: redis_password
+          - name: azure-redis_password
             valueFrom:
               secretKeyRef:
                 name: azure-redis-secret
                 key: password
-          - name: redis_port
+          - name: azure-redis_port
             valueFrom:
               secretKeyRef:
                 name: azure-redis-secret
                 key: port
-          - name: postgres_host
+          - name: azure-postgres_host
             valueFrom:
               secretKeyRef:
-                name: postgresql-secret
+                name: azure-postgresql-secret
                 key: host
-          - name: postgres_database
+          - name: azure-postgres_database
             valueFrom:
               secretKeyRef:
-                name: postgresql-secret
+                name: azure-postgresql-secret
                 key: database
-          - name: postgres_username
+          - name: azure-postgres_username
             valueFrom:
               secretKeyRef:
-                name: postgresql-secret
+                name: azure-postgresql-secret
                 key: username
-          - name: postgres_password
+          - name: azure-postgres_password
             valueFrom:
               secretKeyRef:
-                name: postgresql-secret
+                name: azure-postgresql-secret
                 key: password
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: pgclient-service
+  name: k8-svcat-azure-client-service
   labels:
-    app: pgclient-service
+    app: k8-svcat-azure-client-service
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 9124
   selector:
-    app: pgclient-pod
+    app: k8-svcat-azure-client-pod
