@@ -1,4 +1,4 @@
-###### Key Commands:
+###### Key Commands [Click here for details](#full-details-with-explanation):
 ```sh
 helm init --upgrade
 kubectl create clusterrolebinding tiller-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
