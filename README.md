@@ -62,7 +62,7 @@ brew install kubernetes-service-catalog-client
 
 To use svcat as a plugin, run the following command after downloading:
 ```sh
-./svcat install plugin
+svcat install plugin
 ```
 
 Start by adding the Open Service Broker for Azure Helm repository:
@@ -115,7 +115,7 @@ helm install azure/open-service-broker-azure --name osba --namespace osba --set 
 
 Now, list installed service brokers:
 ```sh
-./svcat get brokers
+svcat get brokers
 ```
 
 You should see output similar to the following:
@@ -127,48 +127,38 @@ NAME                               URL                                STATUS
 
 List the available service classes.
 ```sh
-./svcat get classes
+svcat get classes
 ```
 
 List all available service plans
 ```sh
-./svcat get plans
+svcat get plans
 ```
 
 ```sh
-kubectl create -f ./mypostgresinstance.yml
+kubectl create -f azure-postgres-instance.yml
 ```
 
 ```sh
 svcat get instances
 ```
-You should see the following output:
-```sh
-     NAME       NAMESPACE          CLASS           PLAN    STATUS
-+-------------+-----------+----------------------+-------+--------+
-  pg-instance   default     azure-postgresql-9-6   basic   Ready
-```
+Please wait until you see the STATUS "Ready"
 
 ```sh
-kubectl create -f ./mypostgresbinding.yml
+kubectl create -f azure-postgres-binding.yml
 ```
 
 ```sh
 svcat get bindings
 ```
-You should see the following output:
+Please wait until you see the STATUS "Ready"
+
 ```sh
-        NAME          NAMESPACE    INSTANCE     STATUS
-+-------------------+-----------+-------------+--------+
-  app-pg-binding   default     pg-instance   Ready
+svcat describe instance azure-postgresql-instance
 ```
 
 ```sh
-svcat describe instance pg-instance
-```
-
-```sh
-svcat describe binding app-pg-binding
+svcat describe binding app-azure-postgresql-binding
 ```
 
 ```sh
@@ -176,11 +166,11 @@ kubectl get secrets
 ```
 
 ```sh
-kubectl describe secret postgresql-secret
+kubectl describe secret azure-postgresql-secret
 ```
 
 ```sh
-kubectl get secret postgresql-secret -o yaml
+kubectl get secret azure-postgresql-secret -o yaml
 ```
 
 ```sh
@@ -195,20 +185,20 @@ mvn clean install
 ```
 
 ```sh
-docker rmi -f myclient
+docker rmi -f k8-svcat-azure-client
 ```
 ```sh
-docker build -t myclient .
+docker build -t k8-svcat-azure-client .
 ```
 ```sh
-docker tag myclient vdonthireddy/myclient:2.0
+docker tag k8-svcat-azure-client vdonthireddy/k8-svcat-azure-client:2.0
 ```
 ```sh
-docker push vdonthireddy/myclient:2.0
+docker push vdonthireddy/k8-svcat-azure-client:2.0
 ```
 
 ```sh
-kubectl delete deploy myclient-deployment & kubectl delete service myclient-service
+kubectl delete deploy k8-svcat-azure-client-deployment & kubectl delete service k8-svcat-azure-client-service
 ```
 ```sh
 kubectl apply -f aks.yml
