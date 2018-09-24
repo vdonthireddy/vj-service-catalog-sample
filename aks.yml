@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
        - name: k8-svcat-azure-client-container
-         image: vdonthireddy/k8-svcat-azure-client:2.0
+         image: acrvjdpoc.azurecr.io/k8-svcat-azure-client:2.0
          ports:
           - containerPort: 80
          env:

@@ -7,6 +7,7 @@ docker push vdonthireddy/k8-svcat-azure-client:2.0
 
 kubectl delete deploy k8-svcat-azure-client-deployment
 kubectl delete service k8-svcat-azure-client-service
+
 kubectl apply -f aks.yml
 
 kubectl get po,deploy,svc
