@@ -1,4 +1,4 @@
-######Key Commands:
+###### Key Commands:
 ```sh
 helm init --upgrade
 kubectl create clusterrolebinding tiller-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
@@ -14,7 +14,7 @@ kubectl create -f mypostgresbinding.yml
 kubectl create -f aks.yml
 ```
 
-######Full details with explanation:
+###### Full details with explanation:
 ```sh
 az login
 ```
