@@ -179,20 +179,20 @@ mvn clean install
 ```
 
 ```sh
-docker rmi -f pgclient
+docker rmi -f myclient
 ```
 ```sh
-docker build -t pgclient .
+docker build -t myclient .
 ```
 ```sh
-docker tag pgclient vdonthireddy/pgclient:2.0
+docker tag myclient vdonthireddy/myclient:2.0
 ```
 ```sh
-docker push vdonthireddy/pgclient:2.0
+docker push vdonthireddy/myclient:2.0
 ```
 
 ```sh
-kubectl delete deploy pgclient-deployment & kubectl delete service pgclient-service
+kubectl delete deploy myclient-deployment & kubectl delete service myclient-service
 ```
 ```sh
 kubectl apply -f aks.yml
