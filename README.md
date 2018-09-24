@@ -9,8 +9,8 @@ helm install svc-cat/catalog --name catalog --namespace catalog
 helm repo add azure https://kubernetescharts.blob.core.windows.net/azure
 helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=<AZURE SUBSCRIPTION ID> --set azure.tenantId=<AZURE TENANT ID> --set azure.clientId=<AZURE CLIENT ID> --set azure.clientSecret=<AZURE CLIENT SECRET> --set modules.minStability=experimental
 
-kubectl create -f mypostgresinstance.yml
-kubectl create -f mypostgresbinding.yml
+kubectl create -f azure-postgres-instance.yml
+kubectl create -f azure-postgres-binding.yml
 kubectl create -f aks.yml
 ```
 
