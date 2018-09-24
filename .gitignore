@@ -3,3 +3,7 @@ secrets.txt
 ### Java ###
 target
 !.mvn/wrapper/maven-wrapper.jar
+.vscode
+.settings
+.classpath
+.project
