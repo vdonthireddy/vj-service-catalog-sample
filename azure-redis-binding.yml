@@ -5,5 +5,5 @@ metadata:
   namespace: default
 spec:
   instanceRef:
-    name: azure-redis-instance
-  secretName: azure-redis-secret
+    name: vjd-poc-azredis
+  secretName: vjd-poc-azredis-secret

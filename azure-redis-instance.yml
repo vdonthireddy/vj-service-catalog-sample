@@ -1,11 +1,11 @@
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
-  name: azure-redis-instance
+  name: vjd-poc-azredis
   namespace: default
 spec:
   clusterServiceClassExternalName: azure-rediscache
   clusterServicePlanExternalName: basic
   parameters:
-    location: eastus
-    resourceGroup: rgvjdpoc
+    location: westus2
+    resourceGroup: vjd-poc-rg

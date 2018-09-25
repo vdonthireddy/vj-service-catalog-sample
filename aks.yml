@@ -11,44 +11,44 @@ spec:
     spec:
       containers:
        - name: k8-svcat-azure-client-container
-         image: acrvjdpoc.azurecr.io/k8-svcat-azure-client:2.0
+         image: vdonthireddy/k8-svcat-azure-client:2.0
          ports:
           - containerPort: 80
          env:
           - name: azure-redis_host
             valueFrom:
               secretKeyRef:
-                name: azure-redis-secret
+                name: vjd-poc-azredis-secret
                 key: host
           - name: azure-redis_password
             valueFrom:
               secretKeyRef:
-                name: azure-redis-secret
+                name: vjd-poc-azredis-secret
                 key: password
           - name: azure-redis_port
             valueFrom:
               secretKeyRef:
-                name: azure-redis-secret
+                name: vjd-poc-azredis-secret
                 key: port
           - name: azure-postgres_host
             valueFrom:
               secretKeyRef:
-                name: azure-postgresql-secret
+                name: vjd-poc-azpostgresql-secret
                 key: host
           - name: azure-postgres_database
             valueFrom:
               secretKeyRef:
-                name: azure-postgresql-secret
+                name: vjd-poc-azpostgresql-secret
                 key: database
           - name: azure-postgres_username
             valueFrom:
               secretKeyRef:
-                name: azure-postgresql-secret
+                name: vjd-poc-azpostgresql-secret
                 key: username
           - name: azure-postgres_password
             valueFrom:
               secretKeyRef:
-                name: azure-postgresql-secret
+                name: vjd-poc-azpostgresql-secret
                 key: password
 ---
 apiVersion: v1

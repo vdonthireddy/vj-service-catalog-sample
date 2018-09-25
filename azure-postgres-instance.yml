@@ -1,14 +1,14 @@
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
-  name: azure-postgresql-instance
+  name: vjd-poc-azpostgresql
   namespace: default
 spec:
   clusterServiceClassExternalName: azure-postgresql-9-6
   clusterServicePlanExternalName: basic
   parameters:
-    location: eastus
-    resourceGroup: rgvjdpoc
+    location: westus2
+    resourceGroup: vjd-poc-rg
     firewallRules:
     - startIPAddress: "0.0.0.0"
       endIPAddress: "255.255.255.255"
