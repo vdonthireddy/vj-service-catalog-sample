@@ -7,7 +7,7 @@ helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
 helm install svc-cat/catalog --name catalog --namespace catalog
 
 helm repo add azure https://kubernetescharts.blob.core.windows.net/azure
-helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=<AZURE SUBSCRIPTION ID> --set azure.tenantId=<AZURE TENANT ID> --set azure.clientId=<AZURE CLIENT ID> --set azure.clientSecret=<AZURE CLIENT SECRET> --set modules.minStability=experimental
+helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=**_AZURE SUBSCRIPTION ID_** --set azure.tenantId=**_AZURE TENANT ID_** --set azure.clientId=**_AZURE CLIENT ID_** --set azure.clientSecret=**_AZURE CLIENT SECRET_** --set modules.minStability=experimental
 
 kubectl create -f azure-postgres-instance.yml
 kubectl create -f azure-postgres-binding.yml
@@ -22,7 +22,7 @@ az login
 az account show
 ```
 ```sh
-az aks get-credentials --resource-group <resource group name> --name <AKS cluster name>
+az aks get-credentials --resource-group **_RESOURCE GROUP NAME_** --name **_AKS CLUSTER NAME_**
 ```
 First, check your version of kubectl:
 ```sh
