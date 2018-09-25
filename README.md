@@ -22,7 +22,7 @@ az login
 az account show
 ```
 ```sh
-az aks get-credentials --resource-group **_RESOURCE GROUP NAME_** --name **_AKS CLUSTER NAME_**
+az aks get-credentials --resource-group <resource group name> --name <AKS cluster name>
 ```
 First, check your version of kubectl:
 ```sh
