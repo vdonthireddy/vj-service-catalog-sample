@@ -9,9 +9,9 @@ helm install svc-cat/catalog --name catalog --namespace catalog
 helm repo add azure https://kubernetescharts.blob.core.windows.net/azure
 helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=**_AZURE SUBSCRIPTION ID_** --set azure.tenantId=**_AZURE TENANT ID_** --set azure.clientId=**_AZURE CLIENT ID_** --set azure.clientSecret=**_AZURE CLIENT SECRET_** --set modules.minStability=experimental
 
-kubectl create -f azure-postgres-instance.yml
-kubectl create -f azure-postgres-binding.yml
-kubectl create -f aks.yml
+kubectl create -f azure-postgres-instance.yaml
+kubectl create -f azure-postgres-binding.yaml
+kubectl create -f aks.yaml
 ```
 
 #### Full details with explanation:
@@ -136,7 +136,7 @@ svcat get plans
 ```
 
 ```sh
-kubectl create -f azure-postgres-instance.yml
+kubectl create -f azure-postgres-instance.yaml
 ```
 
 ```sh
@@ -145,7 +145,7 @@ svcat get instances
 Please wait until you see the STATUS "Ready"
 
 ```sh
-kubectl create -f azure-postgres-binding.yml
+kubectl create -f azure-postgres-binding.yaml
 ```
 
 ```sh
@@ -178,7 +178,7 @@ echo 'NTQzMg==' | base64 -D
 ```
 Once the setup of service catalog is complete, and postgres instance and binding is created, run the following to deploy and test your application connecting to postgres instance:
 
-Note: Before you run the following commands, please take a look at aks.yml and allrun.sh files to make sure you have all the secrets created and comment/uncomment the sections based on your requirement.
+Note: Before you run the following commands, please take a look at aks.yaml and allrun.sh files to make sure you have all the secrets created and comment/uncomment the sections based on your requirement.
 
 ```sh
 mvn clean install
@@ -201,7 +201,7 @@ docker push vdonthireddy/k8-svcat-azure-client:2.0
 kubectl delete deploy k8-svcat-azure-client-deployment & kubectl delete service k8-svcat-azure-client-service
 ```
 ```sh
-kubectl apply -f aks.yml
+kubectl apply -f aks.yaml
 ```
 
 ```sh
