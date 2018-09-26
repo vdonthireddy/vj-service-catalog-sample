@@ -113,6 +113,11 @@ If you want to get all the experimental classes as well, use the following comma
 helm install azure/open-service-broker-azure --name osba --namespace osba --set azure.subscriptionId=$AZURE_SUBSCRIPTION_ID --set azure.tenantId=$AZURE_TENANT_ID --set azure.clientId=$AZURE_CLIENT_ID --set azure.clientSecret=$AZURE_CLIENT_SECRET --set modules.minStability=experimental
 ```
 
+If you haven't already installed the ingress controller in the kube-system namespace, execute the following command to install it:
+```sh
+helm install stable/nginx-ingress --namespace kube-system
+```
+
 Now, list installed service brokers:
 ```sh
 svcat get brokers
