@@ -16,6 +16,8 @@ kubectl create -f aks.yaml
 
 #### Full details with explanation:
 Create an account for [Microsoft Azure](https://azure.microsoft.com)
+
+[Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 ```sh
 az login
 ```
@@ -30,7 +32,7 @@ First, check your version of kubectl:
 kubectl version
 ```
 Ensure that the server version and client versions are both 1.9 or above.
-If you don’t have Helm installed already, download the helm CLI (https://github.com/kubernetes/helminstall) and then run the following command (this installs Tiller, the server-side component of Helm, into your Kubernetes cluster).
+If you don’t have Helm installed already, download the [helm CLI](https://github.com/kubernetes/helminstall) and then run the following command (this installs Tiller, the server-side component of Helm, into your Kubernetes cluster).
 ```sh
 helm init --upgrade
 ```
