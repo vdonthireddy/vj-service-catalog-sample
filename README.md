@@ -15,7 +15,7 @@ kubectl create -f aks.yaml
 ```
 
 #### Full details with explanation:
-Create an account for Microsoft Azure (https://azure.microsoft.com)
+Create an account for [Microsoft Azure] (https://azure.microsoft.com)
 ```sh
 az login
 ```
