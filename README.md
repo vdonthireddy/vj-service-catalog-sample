@@ -15,7 +15,7 @@ kubectl create -f aks.yaml
 ```
 
 #### Full details with explanation:
-Create an account for [Microsoft Azure](https://azure.microsoft.com)
+Create an account in [Microsoft Azure](https://azure.microsoft.com)
 
 [Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 ```sh
